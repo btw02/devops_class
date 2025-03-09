@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Twoja Drużyna</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #eef;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Twoja drużyna</h1>
+    <ul>
+      {% for member in team %}
+        <li>{{ member }}</li>
+      {% endfor %}
+    </ul>
+    <a href="/">Powrót</a>
+  </body>
+</html>
