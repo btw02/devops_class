@@ -1,0 +1,36 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t myflaskapp .
+
+    - name: Run tests
+      run: echo "Test"
+
+  deploy:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker image
+      run: docker build -t myflaskapp .
+    - name: Run tests
+      run: echo "Test"
+    - name: Push to GitHub Registry
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        docker tag myflaskapp ghcr.io/${{ github.repository }}/myflaskapp:latest
+        docker push ghcr.io/${{ github.repository }}/myflaskapp:latest
