@@ -35,7 +35,10 @@ jobs:
 
   # Deploy job runs only on pushes (merges) to main.
   deploy:
+###
+    # Commented this code out to allow for easier verification, that this job works correctly.
     #if: github.event_name == 'push'
+###
     runs-on: ubuntu-latest
     permissions:
       contents: read
