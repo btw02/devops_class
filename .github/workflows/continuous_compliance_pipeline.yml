@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '18 0 * * 4'
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
 permissions:
   contents: read
